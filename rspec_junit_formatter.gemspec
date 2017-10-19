@@ -15,7 +15,8 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 2.0.0"
 
   # https://github.com/rspec/rspec-core/commit/f06254c00770387e3a8a2efbdbc973035c217f6a
-  s.add_dependency "rspec-core", ">= 2", "< 4", "!= 2.12.0"
+  s.add_dependency "rspec-core", ">= 3", "< 4", "!= 2.12.0"
+  s.add_dependency "rspec-expectations", ">= 3", "< 4", "!= 2.12.0"
 
   s.add_development_dependency "nokogiri", "~> 1.6"
 
