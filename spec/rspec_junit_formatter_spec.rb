@@ -80,6 +80,7 @@ describe RspecJunitFormatter do
       expect(child.name).to eql("failure")
       expect(child["message"]).not_to be_empty
       expect(child.text.strip).not_to be_empty
+      expect(child.text.lines.first).not_to match(/\e | \\e/x)
     end
 
     # it has shared test cases which list both the inclusion and included files
