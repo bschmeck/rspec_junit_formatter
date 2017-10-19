@@ -77,9 +77,7 @@ private
   end
 
   def failure_for(notification)
-    message_lines = notification.message_lines
-    message_lines[0] = strip_colors(message_lines.first)
-    strip_diff_colors(message_lines.join("\n")) << "\n" << notification.formatted_backtrace.join("\n")
+    strip_colors(notification.message_lines.join("\n")) << "\n" << notification.formatted_backtrace.join("\n")
   end
 
   def exception_for(notification)
@@ -89,8 +87,12 @@ private
   STRIP_DIFF_COLORS_BLOCK_REGEXP = /^ ( [ ]* ) Diff: \e\[0m (?: \n \1 \e\[0m .* )* /x
   STRIP_COLOR_CODES_REGEXP = /\e\[(?:\d+;?)+m/
 
-  def strip_colors(str)
-    str.gsub(STRIP_COLOR_CODES_REGEXP, "")
+  def strip_colors(string)
+    if RSpec.configuration.strip_junit_format_colors
+      string.gsub(STRIP_COLOR_CODES_REGEXP, "")
+    else
+      strip_diff_colors(string)
+    end
   end
 
   def strip_diff_colors(string)
